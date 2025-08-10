@@ -56,7 +56,6 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -161,6 +160,13 @@ static Keychord *keychords[] = {
 	&((Keychord){1, {{MODKEY, XK_m}},                                       setlayout,      {.v = &layouts[2]} }),
 	&((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
 	&((Keychord){1, {{MODKEY|ShiftMask, XK_space}},                         togglefloating, {0} }),
+  &((Keychord){1, {{MODKEY, XK_t}},                                       setlayout,      {.v = &layouts[0]} }),
+	&((Keychord){1, {{MODKEY, XK_e}},                                       setlayout,      {.v = &layouts[1]} }),
+	&((Keychord){1, {{MODKEY, XK_m}},                                       setlayout,      {.v = &layouts[2]} }),
+	&((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_space}},                         togglefloating, {0} }),
+	&((Keychord){1, {{MODKEY, XK_f}},                                       togglefullscreen, {0} }),
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_f}},                             togglefakefullscreen, {0} }),
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
