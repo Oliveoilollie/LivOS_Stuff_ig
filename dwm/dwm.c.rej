@@ -1,29 +1,25 @@
 --- dwm.c
 +++ dwm.c
-@@ -50,6 +50,7 @@
- #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
-                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
- #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
-+#define MINIMIZED(C)            ((getstate(C->win) == IconicState))
- #define LENGTH(X)               (sizeof X / sizeof X[0])
- #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
- #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
-@@ -93,6 +94,7 @@ struct Client {
- 	int bw, oldbw;
- 	unsigned int tags;
- 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
-+	int isgame;
- 	Client *next;
- 	Client *snext;
- 	Monitor *mon;
-@@ -1497,6 +1526,10 @@ setfocus(Client *c)
- 			XA_WINDOW, 32, PropModeReplace,
- 			(unsigned char *) &(c->win), 1);
- 	}
-+
-+	if (c->isgame && c->isfullscreen)
-+		unminimize(c);
-+
- 	sendevent(c, wmatom[WMTakeFocus]);
- }
+@@ -62,6 +62,7 @@ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+ enum { SchemeNorm, SchemeSel }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
+        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
++       NetWMWindowTypeDesktop,
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+ enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+ enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+@@ -1037,6 +1038,14 @@ manage(Window w, XWindowAttributes *wa)
  
+ 	c = ecalloc(1, sizeof(Client));
+ 	c->win = w;
++
++	if (getatomprop(c, netatom[NetWMWindowType]) == netatom[NetWMWindowTypeDesktop]) {
++		XMapWindow(dpy, c->win);
++		XLowerWindow(dpy, c->win);
++		free(c);
++		return;
++	}
++
+ 	/* geometry */
+ 	c->x = c->oldx = wa->x;
+ 	c->y = c->oldy = wa->y;
