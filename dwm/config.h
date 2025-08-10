@@ -44,16 +44,22 @@ static const unsigned int alphas[][3]      = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *defaulttagapps[] = { "st", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
+#define WTYPE "_NET_WM_WINDOW_TYPE_"
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
+	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	/* class      instance    title            tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp",     NULL,       NULL,            0,         1,          0,           0,        -1 },
-	{ "Firefox",  NULL,       NULL,            1 << 8,    0,          0,          -1,        -1 },
-	{ "St",       NULL,       NULL,            0,         0,          1,           0,        -1 },
-	{ NULL,       NULL,       "Event Tester",  0,         0,          0,           1,        -1 }, /* xev */
+	/* class      instance    title          wintype,          tags mask  isfloating  isterminal  noswallow  monitor */
+	{ NULL,       NULL,       NULL,          WTYPE "DIALOG",   0,         1,          0,          0,         -1 },
+	{ NULL,       NULL,       NULL,          WTYPE "UTILITY",  0,         1,          0,          0,         -1 },
+	{ NULL,       NULL,       NULL,          WTYPE "TOOLBAR",  0,         1,          0,          0,         -1 },
+	{ NULL,       NULL,       NULL,          WTYPE "SPLASH",   0,         1,          0,          0,         -1 },
+	{ "Gimp",     NULL,       NULL,          NULL,             0,         1,          0,          0,         -1 },
+	{ "Firefox",  NULL,       NULL,          NULL,             1 << 8,    0,          0,         -1,         -1 },
+	{ "St",       NULL,       NULL,          NULL,             0,         0,          1,          0,         -1 },
+	{ NULL,       NULL,       "Event Tester",NULL,             0,         0,          0,          1,         -1 }, /* xev */
 };
 
 /* layout(s) */
