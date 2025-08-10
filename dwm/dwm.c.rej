@@ -1,27 +1,20 @@
 --- dwm.c
 +++ dwm.c
-@@ -62,7 +62,7 @@ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
- enum { SchemeNorm, SchemeSel }; /* color schemes */
+@@ -63,7 +63,7 @@ enum { SchemeNorm, SchemeSel }; /* color schemes */
  enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
         NetWMFullscreen, NetActiveWindow, NetWMWindowType,
--       NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
-+       NetClientList, NetLast }; /* EWMH atoms */
- enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+-enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
++enum { WMClass, WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
  enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
         ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
-@@ -170,6 +171,7 @@ static void focus(Client *c);
- static void focusin(XEvent *e);
- static void focusmon(const Arg *arg);
- static void focusstack(const Arg *arg);
-+static Atom getatomprop(Client *c, Atom prop);
- static int getrootptr(int *x, int *y);
- static long getstate(Window w);
- static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
-@@ -1562,7 +1565,6 @@ setup(void)
- 	netatom[NetWMCheck] = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
- 	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
- 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
--	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
- 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
- 	/* init cursors */
- 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
+ 
+@@ -1246,6 +1246,8 @@ propertynotify(XEvent *e)
+ 		}
+ 		if (ev->atom == netatom[NetWMWindowType])
+ 			updatewindowtype(c);
++		if (ev->atom == wmatom[WMClass])
++			applyrules(c);
+ 	}
+ }
+ 
