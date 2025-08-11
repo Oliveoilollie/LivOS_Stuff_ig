@@ -1,21 +1,13 @@
 --- dmenu.c
 +++ dmenu.c
-@@ -725,14 +768,14 @@ setup(void)
- 
+@@ -799,7 +915,9 @@ setup(void)
  	/* create menu window */
  	swa.override_redirect = True;
--	swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
-+	swa.background_pixel = 0;
-+	swa.colormap = cmap;
- 	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask;
+ 	swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
+-	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask;
++	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask |
++	                 ButtonPressMask;
++
  	win = XCreateWindow(dpy, root, x, y, mw, mh, 0,
--	                    CopyFromParent, CopyFromParent, CopyFromParent,
--	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
-+	                    depth, InputOutput, visual,
-+	                    CWOverrideRedirect|CWBackPixel|CWBorderPixel|CWColormap|CWEventMask, &swa);
- 	XSetClassHint(dpy, win, &ch);
- 
--
- 	/* input methods */
- 	if ((xim = XOpenIM(dpy, NULL, NULL, NULL)) == NULL)
- 		die("XOpenIM failed: could not open input device");
+ 	                    CopyFromParent, CopyFromParent, CopyFromParent,
+ 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);

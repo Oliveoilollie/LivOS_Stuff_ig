@@ -43,7 +43,7 @@ static const char *colors[][3] = {
 };
 
 static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
+
 	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
@@ -123,7 +123,7 @@ static const Layout layouts[] = {
 
 /* --- Commands --- */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_normbg, "-nf", col_normfg, "-sb", col_selbg, "-sf", col_selborder, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_normbg, "-nf", col_normfg, "-sb", col_selbg, "-sf", col_selfg, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 /* Applications (Office & Productivity) */
@@ -200,7 +200,7 @@ static Keychord *keychords[] = {
     &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                            spawn,          {.v = libreofficecmd} }),
     &((Keychord){2, {{MODKEY, XK_a}, {0, XK_o}},                            spawn,          {.v = obsidiancmd} }), 
     &((Keychord){2, {{MODKEY, XK_a}, {0, XK_x}},                            spawn,          {.v = xarchivercmd} }),
-    &((Keychord){1, {{MODKEY|ControlMask, XK_s}}, spawndefault, {0} }),
+    &((Keychord){1, {{MODKEY|ControlMask, XK_d}}, spawndefault, {0} }),
 
 
     /* MODKEY + c -> Configuration */
