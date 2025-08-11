@@ -1,388 +1,292 @@
-i.TH LIVS-DWM 1 "August 2025" "Liv's dwm build" "User Commands"
+.TH DWM 1 "dwm-VERSION" "Dynamic Window Manager"
 .SH NAME
-livs-dwm \- a dynamic, but surprisingly feature-rich, window manager for X
+dwm \- dynamic window manager
 .SH SYNOPSIS
-.B livs-dwm
+.B dwm
+.RB [\-v]
 .SH DESCRIPTION
-.B livs-dwm
-is Liv's personal, heavily patched build of
-.BR dwm .
-It manages windows in tiled, monocle, and floating layouts. All of the layouts can be applied dynamically, optimizing the environment for the application in use and the task performed. It is keyboard-driven, ridiculously fast, and famously configured by editing a C header file and recompiling.
-.PP
-You have taken the minimalist philosophy of
-.B dwm
-and said, "Yes, but what if it did... more?" This build is the glorious result. It has gaps, it has transparency, it has keychords, it even has a systray! It swallows windows, starts its own apps, and can be restarted without making all your windows flee in terror.
-.PP
-If it breaks, you get to keep both pieces and the unique learning experience of debugging your own window manager. You wanted control, you got it.
-.SH PATCHES APPLIED
-This build isn't your grandfather's
-.BR dwm .
-It has been augmented with the following digital appendages:
+dwm is a dynamic window manager for X. It manages windows in tiled, monocle,
+and floating layouts. Layouts can be applied dynamically, optimizing the
+environment for the application in use and the task performed.
+
+This build includes numerous patches such as systray support, vanitygaps,
+keychords, swallow, fadeinactive, and many others.
+
+.SH OPTIONS
 .TP
-.B dwm-alpha-systray
-For making your terminal just transparent enough to see the anime wallpaper behind it, and for wrangling tray icons.
+.B \-v
+Prints version information to standard output, then exits.
+
+.SH CUSTOMIZATION
+dwm is customized by creating a custom \fIconfig.h\fR and recompiling the
+source code. Unlike most window managers, dwm’s configuration is baked into
+the executable, making it both fast and secure.
+
+.SH PATCHES INCLUDED
+.IP \[bu] 2
+alpha-systray
+.IP \[bu]
+autostart
+.IP \[bu]
+cfacts-vanitygaps
+.IP \[bu]
+cyclelayouts
+.IP \[bu]
+cyclewindows
+.IP \[bu]
+default-tag-apps
+.IP \[bu]
+desktop-icons
+.IP \[bu]
+fadeinactive
+.IP \[bu]
+games
+.IP \[bu]
+hide-vacant-tags
+.IP \[bu]
+keychord
+.IP \[bu]
+make-ewmh-windows-float
+.IP \[bu]
+restartsig
+.IP \[bu]
+spotify-workaround
+.IP \[bu]
+swallow
+.IP \[bu]
+custom-refresh-rate
+
+.SH USAGE
+.SS Status Bar
 .TP
-.B dwm-autostart
-Executes
-.I ~/.dwm/autostart.sh
-on startup. Because typing the same commands every time is for the birds.
-.TP
-.B dwm-cfacts-vanitygaps
-Gives you pixel-perfect control over window gaps and sizing factors. For the true digital feng shui master.
-.TP
-.B dwm-customrefreshrate
-So your window dragging is as buttery-smooth as your 165Hz monitor.
-.TP
-.B dwm-cyclelayouts & dwm-cyclewindows
-Lets you spin through your open layouts and windows like a game show wheel.
-.TP
-.B dwm-default-tag-apps
-Because your browser should
-.I always
-open on tag 2. It's just natural.
-.TP
-.B dwm-desktop_icons
-Wait, icons? On the desktop? In
-.I my
-.BR dwm?
-A concession to modernity we shall not speak of again.
-.TP
-.B dwm-fadeinactive
-Makes unfocused windows politely fade into the background, highlighting your current masterpiece of procrastination.
-.TP
-.B dwm-fullscreen-compilation-noborder
-Because when a window is fullscreen, it should be
-.I actually
-fullscreen. No questions asked.
-.TP
-.B dwm-games
-What does it do? We're not sure. Probably adds +5 FPS to your
-.I nethack
-sessions.
-.TP
-.B dwm-hide_vacant_tags
-Keeps your bar tidy by hiding tags that have no windows. Minimalism strikes back.
-.TP
-.B dwm-keychord
-The heart of this build's efficiency. Turns your keyboard into a multi-layered command center.
-.TP
-.B dwm-make_ewmh_windows_float
-Tells misbehaving dialog boxes from GIMP and friends to open as floating windows, as nature intended.
-.TP
-.B dwm-restartsig
-Lets you restart
-.B dwm
-in-place with a keypress. Recompile and reload without losing your precious layout.
-.TP
-.B dwm-spotifyworkaround
-Sometimes, you have to fight for your right to party. This patch makes Spotify behave.
-.TP
-.B dwm-swallow
-Enables a terminal to "swallow" a GUI window it launches, automatically replacing it when the GUI program exits. Efficient and oddly satisfying.
-.SH KEYBINDINGS
-The default modifier key is
-.BR Mod4 ,
-also known as the "Super" or "Windows" key.
-.SS Primary Launchers
-.TP
-.B Mod + p
-Launch
-.B dmenu
-for running any command.
-.TP
-.B Mod + Shift + Return
-Launch a new
-.B st
-terminal.
-.TP
-.B Mod + e
-Launch the
-.B pcmanfm
-GUI file manager.
-.TP
-.B Mod + Shift + e
-Launch the
-.B lf
-terminal file manager.
-.SS Keychords
-These bindings require you to press the first key combination, release, and then press the second key.
-.TP
-.B Mod + a, then [key] \- Applications
-.PD 0
-.TP 2
-.B a
-Launch
-.B Ark
-(Archive Tool).
-.TP 2
-.B b
-Launch
-.B Bitwarden.
-.TP 2
-.B c
-Launch
-.B GnuCash.
-.TP 2
-.B k
-Launch
-.B KeePassXC.
-.TP 2
-.B l
-Launch
-.B LibreOffice.
-.TP 2
-.B o
-Launch
-.B Obsidian.
-.TP 2
-.B x
-Launch
-.B XArchiver.
-.PD
-.TP
-.B Mod + c, then [key] \- Configuration
-.PD 0
-.TP 2
-.B a
-Launch
-.B lxappearance
-(GTK Theme Switcher).
-.TP 2
-.B b
-Launch
-.B blueman-manager
-(Bluetooth).
-.TP 2
-.B d
-Launch
-.B pavucontrol
-(Audio Volume).
-.TP 2
-.B f
-Launch
-.B font-manager.
-.TP 2
-.B n
-Launch
-.B nm-connection-editor
-(Network).
-.TP 2
-.B p
-Launch
-.B system-config-printer.
-.TP 2
-.B s
-Launch
-.B nvidia-settings.
-.TP 2
-.B t
-Launch
-.B Flatseal
-(Flatpak Permissions).
-.PD
-.TP
-.B Mod + d, then [key] \- Development
-.PD 0
-.TP 2
-.B c
-Launch
-.B VSCodium.
-.TP 2
-.B n
-Launch
-.B neovim
-in a new terminal.
-.TP 2
-.B g
-Launch
-.B gdb
-in a new terminal.
-.TP 2
-.B v
-Launch
-.B virt-manager.
-.PD
-.TP
-.B Mod + g, then [key] \- Gaming
-.PD 0
-.TP 2
-.B s
-Launch
-.BR Steam .
-.TP 2
-.B h
-Launch
-.B Heroic Games Launcher.
-.TP 2
-.B p
-Launch
-.B Prism Launcher
-(Minecraft).
-.TP 2
-.B r
-Launch
-.BR RetroArch .
-.TP 2
-.B o
-Launch
-.BR osu! .
-.PD
-.TP
-.B Mod + m, then [key] \- Media & Graphics
-.PD 0
-.TP 2
-.B g
-Launch
-.BR GIMP .
-.TP 2
-.B i
-Launch
-.B nsxiv
-(Image Viewer).
-.TP 2
-.B k
-Launch
-.BR Kdenlive .
-.TP 2
-.B m
-Launch
-.BR mpv .
-.TP 2
-.B n
-Launch
-.B ncmpcpp
-(Music Player Client).
-.TP 2
-.B o
-Launch
-.B OBS Studio.
-.TP 2
-.B s
-Launch
-.BR Spotify .
-.TP 2
-.B v
-Launch
-.B Vesktop
-(Discord Client).
-.PD
-.TP
-.B Mod + n, then [key] \- Network
-.PD 0
-.TP 2
-.B b
-Launch
-.B Firefox
-(Browser).
-.TP 2
-.B c
-Launch
-.B Ungoogled Chromium.
-.TP 2
-.B n
-Launch
-.B newsboat
-(RSS Reader).
-.TP 2
-.B p
-Launch
-.B profanity
-(XMPP Client).
-.PD
-.TP
-.B Mod + s, then [key] \- System
-.PD 0
-.TP 2
-.B c
-Open
-.B clipit
-(Clipboard Manager).
-.TP 2
-.B h
-Launch
-.B htop
-(Process Viewer).
-.TP 2
-.B n
-Launch
-.B nvtop
-(NVIDIA GPU Monitor).
-.TP 2
-.B g
-Launch
-.B GParted
-(Partition Editor).
-.TP 2
-.B s
-Launch
-.B Synaptic
-(Package Manager).
-.TP 2
-.B r
-Toggle
-.B redshift
-(Night Light).
-.TP 2
-.B x
-Show power menu (Shutdown/Reboot/Lock).
-.PD
+.B MODKEY + b
+Toggle bar visibility
+
 .SS Window Management
 .TP
-.B Mod + j/k
-Focus next/previous window in stack.
+.B MODKEY + j
+Focus next window in stack
 .TP
-.B Mod + h/l
-Decrease/increase master area size.
+.B MODKEY + k
+Focus previous window in stack
 .TP
-.B Mod + Return
-Move focused window to master position (zoom).
+.B MODKEY + Return
+Zoom focused window to/from master area
 .TP
-.B Mod + Shift + c
-Close the focused window. So long, and thanks for all the RAM.
+.B MODKEY + Shift + c
+Close focused window
 .TP
-.B Mod + Shift + Space
-Toggle floating mode for a window.
+.B MODKEY + Shift + Space
+Toggle floating state for window
 .TP
-.B Mod + f
-Toggle fullscreen for a window.
+.B MODKEY + f
+Toggle fullscreen for window
 .TP
-.B Mod + b
-Toggle the status bar. For when you need
-.I every
-last pixel.
+.B MODKEY + n
+Focus next window of same class
 .TP
-.B Mod + Shift + Comma/Period
-Cycle through available layouts.
-.SS Tag and Monitor Management
+.B MODKEY + Shift + n
+Focus previous window of same class
+
+.SS Layout Management
 .TP
-.B Mod + [1-9]
-View tag [1-9].
+.B MODKEY + t
+Set tiled layout
 .TP
-.B Mod + Shift + [1-9]
-Move focused window to tag [1-9].
+.B MODKEY + f
+Set floating layout
 .TP
-.B Mod + Comma/Period
-Focus previous/next monitor.
+.B MODKEY + space
+Cycle through layouts
 .TP
-.B Mod + Ctrl + Shift + Comma/Period
-Send focused window to previous/next monitor.
-.SH CONFIGURATION
-.B livs-dwm
-is configured by creating a custom
-.B config.h
-and (re)compiling the source code. This is seen as a feature, not a bug.
-.PP
-The
-.B autostart
-patch will execute shell commands from
-.I ~/.dwm/autostart.sh
-when dwm starts. This is the civilized way to launch your compositor, status bar scripts, and wallpaper daemon.
+.B MODKEY + Control + ,
+Cycle to previous layout
+.TP
+.B MODKEY + Control + .
+Cycle to next layout
+.TP
+.B MODKEY + h
+Decrease master area size
+.TP
+.B MODKEY + l
+Increase master area size
+.TP
+.B MODKEY + Shift + h
+Increase window factor
+.TP
+.B MODKEY + Shift + l
+Decrease window factor
+.TP
+.B MODKEY + Shift + o
+Reset window factors
+
+.SS Tag Management
+.TP
+.B MODKEY + [1-9]
+View tag [1-9]
+.TP
+.B MODKEY + Shift + [1-9]
+Move window to tag [1-9]
+.TP
+.B MODKEY + Control + [1-9]
+Toggle view of tag [1-9]
+.TP
+.B MODKEY + 0
+View all tags
+.TP
+.B MODKEY + Shift + 0
+Make focused window visible on all tags
+
+.SS Monitor Management
+.TP
+.B MODKEY + ,
+Focus previous monitor
+.TP
+.B MODKEY + .
+Focus next monitor
+.TP
+.B MODKEY + Shift + ,
+Move window to previous monitor
+.TP
+.B MODKEY + Shift + .
+Move window to next monitor
+
+.SS Gap Management
+.TP
+.B MODKEY + Alt + u
+Increase gaps
+.TP
+.B MODKEY + Alt + Shift + u
+Decrease gaps
+.TP
+.B MODKEY + Alt + o
+Increase outer gaps
+.TP
+.B MODKEY + Alt + Shift + o
+Decrease outer gaps
+.TP
+.B MODKEY + Alt + i
+Increase inner gaps
+.TP
+.B MODKEY + Alt + Shift + i
+Decrease inner gaps
+.TP
+.B MODKEY + Alt + 0
+Toggle gaps
+.TP
+.B MODKEY + Alt + Shift + 0
+Reset gaps to default
+
+.SS Opacity Control
+.TP
+.B MODKEY + o
+Toggle opacity for inactive windows
+
+.SS Application Launchers
+.TP
+.B MODKEY + p
+Launch dmenu
+.TP
+.B MODKEY + Shift + Return
+Launch terminal (\fIst\fR)
+.TP
+.B MODKEY + e
+Launch file manager (\fIpcmanfm\fR)
+.TP
+.B MODKEY + Shift + e
+Launch terminal file manager (\fIlf\fR)
+.TP
+.B MODKEY + Control + e
+Launch application menu (pcmanfm menu)
+
+.SS Keychord Launchers
+.TP
+.B MODKEY + a, [a-z]
+Launch various applications (see \fIconfig.h\fR)
+.TP
+.B MODKEY + c, [a-z]
+Launch configuration tools
+.TP
+.B MODKEY + d, [a-z]
+Launch development tools
+.TP
+.B MODKEY + g, [a-z]
+Launch games
+.TP
+.B MODKEY + m, [a-z]
+Launch media applications
+.TP
+.B MODKEY + Control + n, [a-z]
+Launch network applications
+.TP
+.B MODKEY + s, [a-z]
+Launch system utilities
+
+.SS Screenshots
+.TP
+.B Print
+Take screenshot
+.TP
+.B Shift + Print
+Take area screenshot
+.TP
+.B MODKEY + Shift + s
+Take area screenshot to clipboard
+
+.SS Media Keys
+.TP
+.B XF86AudioPlay
+Play/Pause media
+.TP
+.B XF86AudioNext
+Next track
+.TP
+.B XF86AudioPrev
+Previous track
+.TP
+.B XF86AudioLowerVolume
+Lower volume
+.TP
+.B XF86AudioRaiseVolume
+Raise volume
+.TP
+.B XF86AudioMute
+Toggle mute
+
+.SH QUITTING
+.TP
+.B MODKEY + Shift + q
+Quit dwm
+.TP
+.B MODKEY + Control + Shift + q
+Restart dwm
+
+.SH CUSTOMIZATION OPTIONS
+Your configuration includes:
+.IP \[bu] 2
+9 tags with default applications
+.IP \[bu]
+Smart gaps and window swallowing
+.IP \[bu]
+Window opacity controls
+.IP \[bu]
+System tray support
+.IP \[bu]
+165Hz refresh rate for smooth operations
+.IP \[bu]
+Cascadia Code 10pt font
+.IP \[bu]
+Gruvbox color scheme
+
 .SH SEE ALSO
 .BR dmenu (1),
-.BR st (1),
-.BR xscreensaver-command (1)
+.BR st (1)
+
 .SH BUGS
-Probably many. It's your build now. Report them to yourself and have fun fixing them.
+Default tag applications may not work for all Flatpak applications due to
+WM_CLASS naming differences.
+
 .SH AUTHOR
-.B livs-dwm
-was configured by Liv, with a little help from the suckless.org community and a semi-sentient language model that thinks in `roff` code.
+Liv <livrickey@gmail.com>  
+Note: This man page was generated with AI assistance.
+

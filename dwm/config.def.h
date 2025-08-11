@@ -65,22 +65,36 @@ static const Rule rules[] = {
 	{ NULL,          NULL,       NULL,           WTYPE "TOOLBAR",  0,         1,          0,          0,         -1 },
 	{ NULL,          NULL,       NULL,           WTYPE "SPLASH",   0,         1,          0,          0,         -1 },
 	{ "St",          NULL,       NULL,           NULL,             0,         0,          1,          0,         -1 },
+  { "st-256color", NULL,       NULL,           NULL,             0,         0,          1,          0,         -1 },
+	{ "Alacritty",   NULL,       NULL,           NULL,             1 << 1,    0,          1,          0,         -1 },
+  { "kitty",       NULL,       NULL,           NULL,             1 << 1,    0,          1,          0,         -1 },
+  { "xterm",       NULL,       NULL,           NULL,             1 << 1,    0,          1,          0,         -1 },
 	{ NULL,          NULL,       "Event Tester", NULL,             0,         0,          0,          1,         -1 }, /* xev */
 
 	/* App-specific rules -- pls ducking work */
 	{ "firefox-esr", NULL,       NULL,           NULL,             1 << 0,    0,          0,          0,         -1 }, 
+	{ "Io.github.ungoogled_software.ungoogled_chromium", NULL,       NULL,           NULL,             1 << 0,    0,          0,          0,         -1 },  //not pretty thanks fucking flatpak
 	{ "VSCodium",    NULL,       NULL,           NULL,             1 << 1,    0,          0,          0,         -1 }, 
-	{ "virt-manager",NULL,       NULL,           NULL,             1 << 1,    1,          0,          0,         -1 }, 
+	{ "Virt-manager",NULL,       NULL,           NULL,             1 << 1,    0,          0,          0,         -1 },  
 	{ "Pcmanfm",     NULL,       NULL,           NULL,             1 << 5,    0,          0,          0,         -1 }, 
+	{ "Xarchiver",   NULL,       NULL,           NULL,             1 << 5,    0,          0,          0,         -1 }, 
+	{ "ark",         NULL,       NULL,           NULL,             1 << 5,    0,          0,          0,         -1 }, 
 	{ "libreoffice", NULL,       NULL,           NULL,             1 << 5,    0,          0,          0,         -1 }, 
-	{ "Steam",       NULL,       NULL,           NULL,             1 << 4,    0,          0,          0,         -1 }, 
-	{ "Vesktop",     NULL,       NULL,           NULL,             1 << 3,    0,          0,          0,         -1 }, 
+	{ "steam",       NULL,       NULL,           NULL,             1 << 4,    0,          0,          0,         -1 }, 
+	{ "heroic",      NULL,       NULL,           NULL,             1 << 4,    0,          0,          0,         -1 }, 
+	{ "retroarch",   NULL,       NULL,           NULL,             1 << 4,    0,          0,          0,         -1 }, 
+	{ "osu!",        NULL,       NULL,           NULL,             1 << 4,    0,          0,          0,         -1 }, 
+	{ "vesktop",     NULL,       NULL,           NULL,             1 << 3,    0,          0,          0,         -1 }, 
 	{ "Spotify",     NULL,       NULL,           NULL,             1 << 2,    0,          0,          0,         -1 }, 
+	{ "Cider",       NULL,       NULL,           NULL,             1 << 2,    0,          0,          0,         -1 }, 
 	{ "Gimp",        NULL,       NULL,           NULL,             1 << 6,    1,          0,          0,         -1 }, 
-	{ "Kdenlive",    NULL,       NULL,           NULL,             1 << 6,    0,          0,          0,         -1 },
+	{ "kdenlive",    NULL,       NULL,           NULL,             1 << 6,    0,          0,          0,         -1 },
 	{ "obs",         NULL,       NULL,           NULL,             1 << 6,    0,          0,          0,         -1 }, 
-	{ "GnuCash",     NULL,       NULL,           NULL,             1 << 7,    1,          0,          0,         -1 }, 
 	{ "Flatseal",    NULL,       NULL,           NULL,             1 << 8,    1,          0,          0,         -1 }, 
+	{ "Bitwarden",   NULL,       NULL,           NULL,             1 << 8,    1,          0,          0,         -1 }, 
+	{ "Io.ente.auth",NULL,       NULL,           NULL,             1 << 8,    1,          0,          0,         -1 }, 
+	{ "KeePassXC",   NULL,       NULL,           NULL,             1 << 8,    1,          0,          0,         -1 }, 
+	{ "openrgb",   NULL,       NULL,           NULL,             1 << 7,    1,          0,          0,         -1 }, 
 };
 	
 /* layout(s) */
@@ -162,7 +176,7 @@ static const char *gimpcmd[] = { "flatpak", "run", "org.gimp.GIMP", NULL };
 static const char *kdenlivecmd[] = { "flatpak", "run", "org.kde.kdenlive", NULL };
 static const char *ncmpcppcmd[] = { "st", "-e", "ncmpcpp", NULL };
 static const char *obscmd[] = { "flatpak", "run", "com.obsproject.Studio", NULL };
-static const char *cidercmd[] = { "spotify-adblock", NULL };
+static const char *cidercmd[] = { "flatpak", "run", "sh.cider.genten", NULL };
 static const char *spotifycmd[] = { "spotify-adblock", NULL };
 static const char *vesktopcmd[] = { "flatpak", "run", "dev.vencord.Vesktop", NULL };
 
@@ -174,7 +188,7 @@ static const char *profanitycmd[] = { "st", "-e", "profanity", NULL };
 
 /* System Utilities */
 static const char *fmcmd[] = { "pcmanfm", NULL };
-static const char *fmcmdapp[] = { "pcmanfm", "menu://applications/" };
+static const char *fmcmdapp[] = { "pcmanfm", "menu://applications/", NULL };
 static const char *lfcmd[] = { "st", "-e", "lf", NULL };
 static const char *htopcmd[] = { "st", "-e", "htop", NULL };
 static const char *nvtopcmd[] = { "st", "-e", "nvtop", NULL };
@@ -200,7 +214,7 @@ static Keychord *keychords[] = {
     &((Keychord){2, {{MODKEY, XK_a}, {0, XK_l}},                            spawn,          {.v = libreofficecmd} }),
     &((Keychord){2, {{MODKEY, XK_a}, {0, XK_o}},                            spawn,          {.v = obsidiancmd} }), 
     &((Keychord){2, {{MODKEY, XK_a}, {0, XK_x}},                            spawn,          {.v = xarchivercmd} }),
-    &((Keychord){1, {{MODKEY|ControlMask, XK_d}}, spawndefault, {0} }),
+    &((Keychord){1, {{MODKEY|ControlMask, XK_d}},                           spawndefault, {0} }),
 
 
     /* MODKEY + c -> Configuration */
