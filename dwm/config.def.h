@@ -23,8 +23,8 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;   /* 0 means no systray */
 static const int refreshrate        = 165;      /* Update rate for drag and resize events, in updates (frames) per second */
-static const char *fonts[]          = { "JetBrains Mono:size=9" };
-static const char dmenufont[]       = "JetBrains Mono:size=9";
+static const char *fonts[]          = { "Cascadia Code:size=10" };
+static const char dmenufont[]       = "Cascadia Code:size=10";
 
 static const char col_normfg[] = "#fbf1c7";     /* fg0 */
 static const char col_normbg[] = "#282828";     /* bg0 */
