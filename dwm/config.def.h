@@ -318,6 +318,8 @@ static Keychord *keychords[] = {
 	&((Keychord){1, {{MODKEY|Mod1Mask|ShiftMask, XK_9}},                    incrovgaps,     {.i = -1 } }),
 	&((Keychord){1, {{MODKEY|Mod1Mask, XK_0}},                              togglegaps,     {0} }),
 	&((Keychord){1, {{MODKEY|Mod1Mask|ShiftMask, XK_0}},                    defaultgaps,    {0} }),
+	&((Keychord){1, {{MODKEY, XK_Left}},                                    rotatetags,     {.i = -1} }),
+	&((Keychord){1, {{MODKEY, XK_Right}},                                    rotatetags,     {.i = +1} }),
 
 	/* Opacity control */
 	&((Keychord){1, {{MODKEY, XK_o}},                                       toggleopacity,  {0} }),
