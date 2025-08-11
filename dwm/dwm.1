@@ -1,192 +1,388 @@
-.TH DWM 1 dwm\-VERSION
+i.TH LIVS-DWM 1 "August 2025" "Liv's dwm build" "User Commands"
 .SH NAME
-dwm \- dynamic window manager
+livs-dwm \- a dynamic, but surprisingly feature-rich, window manager for X
 .SH SYNOPSIS
-.B dwm
-.RB [ \-v ]
+.B livs-dwm
 .SH DESCRIPTION
-dwm is a dynamic window manager for X. It manages windows in tiled, monocle
-and floating layouts. Either layout can be applied dynamically, optimising the
-environment for the application in use and the task performed.
-.P
-In tiled layouts windows are managed in a master and stacking area. The master
-area on the left contains one window by default, and the stacking area on the
-right contains all other windows. The number of master area windows can be
-adjusted from zero to an arbitrary number. In monocle layout all windows are
-maximised to the screen size. In floating layout windows can be resized and
-moved freely. Dialog windows are always managed floating, regardless of the
-layout applied.
-.P
-Windows are grouped by tags. Each window can be tagged with one or multiple
-tags. Selecting certain tags displays all windows with these tags.
-.P
-Each screen contains a small status bar which displays all available tags, the
-layout, the title of the focused window, and the text read from the root window
-name property, if the screen is focused. A floating window is indicated with an
-empty square and a maximised floating window is indicated with a filled square
-before the windows title.  The selected tags are indicated with a different
-color. The tags of the focused window are indicated with a filled square in the
-top left corner.  The tags which are applied to one or more windows are
-indicated with an empty square in the top left corner.
-.P
-dwm draws a small border around windows to indicate the focus state.
-.SH OPTIONS
+.B livs-dwm
+is Liv's personal, heavily patched build of
+.BR dwm .
+It manages windows in tiled, monocle, and floating layouts. All of the layouts can be applied dynamically, optimizing the environment for the application in use and the task performed. It is keyboard-driven, ridiculously fast, and famously configured by editing a C header file and recompiling.
+.PP
+You have taken the minimalist philosophy of
+.B dwm
+and said, "Yes, but what if it did... more?" This build is the glorious result. It has gaps, it has transparency, it has keychords, it even has a systray! It swallows windows, starts its own apps, and can be restarted without making all your windows flee in terror.
+.PP
+If it breaks, you get to keep both pieces and the unique learning experience of debugging your own window manager. You wanted control, you got it.
+.SH PATCHES APPLIED
+This build isn't your grandfather's
+.BR dwm .
+It has been augmented with the following digital appendages:
 .TP
-.B \-v
-prints version information to stderr, then exits.
-.SH USAGE
-.SS Status bar
+.B dwm-alpha-systray
+For making your terminal just transparent enough to see the anime wallpaper behind it, and for wrangling tray icons.
 .TP
-.B X root window name
-is read and displayed in the status text area. It can be set with the
-.BR xsetroot (1)
-command.
+.B dwm-autostart
+Executes
+.I ~/.dwm/autostart.sh
+on startup. Because typing the same commands every time is for the birds.
 .TP
-.B Button1
-click on a tag label to display all windows with that tag, click on the layout
-label toggles between tiled and floating layout.
+.B dwm-cfacts-vanitygaps
+Gives you pixel-perfect control over window gaps and sizing factors. For the true digital feng shui master.
 .TP
-.B Button3
-click on a tag label adds/removes all windows with that tag to/from the view.
+.B dwm-customrefreshrate
+So your window dragging is as buttery-smooth as your 165Hz monitor.
 .TP
-.B Mod1\-Button1
-click on a tag label applies that tag to the focused window.
+.B dwm-cyclelayouts & dwm-cyclewindows
+Lets you spin through your open layouts and windows like a game show wheel.
 .TP
-.B Mod1\-Button3
-click on a tag label adds/removes that tag to/from the focused window.
-.SS Keyboard commands
+.B dwm-default-tag-apps
+Because your browser should
+.I always
+open on tag 2. It's just natural.
 .TP
-.B Mod1\-Shift\-Return
-Start
-.BR st(1).
+.B dwm-desktop_icons
+Wait, icons? On the desktop? In
+.I my
+.BR dwm?
+A concession to modernity we shall not speak of again.
 .TP
-.B Mod1\-p
-Spawn
-.BR dmenu(1)
-for launching other programs.
+.B dwm-fadeinactive
+Makes unfocused windows politely fade into the background, highlighting your current masterpiece of procrastination.
 .TP
-.B Mod1\-,
-Focus previous screen, if any.
+.B dwm-fullscreen-compilation-noborder
+Because when a window is fullscreen, it should be
+.I actually
+fullscreen. No questions asked.
 .TP
-.B Mod1\-.
-Focus next screen, if any.
+.B dwm-games
+What does it do? We're not sure. Probably adds +5 FPS to your
+.I nethack
+sessions.
 .TP
-.B Mod1\-Shift\-,
-Send focused window to previous screen, if any.
+.B dwm-hide_vacant_tags
+Keeps your bar tidy by hiding tags that have no windows. Minimalism strikes back.
 .TP
-.B Mod1\-Shift\-.
-Send focused window to next screen, if any.
+.B dwm-keychord
+The heart of this build's efficiency. Turns your keyboard into a multi-layered command center.
 .TP
-.B Mod1\-b
-Toggles bar on and off.
+.B dwm-make_ewmh_windows_float
+Tells misbehaving dialog boxes from GIMP and friends to open as floating windows, as nature intended.
 .TP
-.B Mod1\-t
-Sets tiled layout.
+.B dwm-restartsig
+Lets you restart
+.B dwm
+in-place with a keypress. Recompile and reload without losing your precious layout.
 .TP
-.B Mod1\-f
-Sets floating layout.
+.B dwm-spotifyworkaround
+Sometimes, you have to fight for your right to party. This patch makes Spotify behave.
 .TP
-.B Mod1\-m
-Sets monocle layout.
+.B dwm-swallow
+Enables a terminal to "swallow" a GUI window it launches, automatically replacing it when the GUI program exits. Efficient and oddly satisfying.
+.SH KEYBINDINGS
+The default modifier key is
+.BR Mod4 ,
+also known as the "Super" or "Windows" key.
+.SS Primary Launchers
 .TP
-.B Mod1\-space
-Toggles between current and previous layout.
+.B Mod + p
+Launch
+.B dmenu
+for running any command.
 .TP
-.B Mod1\-Control\-,
-Cycles backwards in layout list.
+.B Mod + Shift + Return
+Launch a new
+.B st
+terminal.
 .TP
-.B Mod1\-Control\-.
-Cycles forwards in layout list.
+.B Mod + e
+Launch the
+.B pcmanfm
+GUI file manager.
 .TP
-.B Mod1\-j
-Focus next window.
+.B Mod + Shift + e
+Launch the
+.B lf
+terminal file manager.
+.SS Keychords
+These bindings require you to press the first key combination, release, and then press the second key.
 .TP
-.B Mod1\-k
-Focus previous window.
+.B Mod + a, then [key] \- Applications
+.PD 0
+.TP 2
+.B a
+Launch
+.B Ark
+(Archive Tool).
+.TP 2
+.B b
+Launch
+.B Bitwarden.
+.TP 2
+.B c
+Launch
+.B GnuCash.
+.TP 2
+.B k
+Launch
+.B KeePassXC.
+.TP 2
+.B l
+Launch
+.B LibreOffice.
+.TP 2
+.B o
+Launch
+.B Obsidian.
+.TP 2
+.B x
+Launch
+.B XArchiver.
+.PD
 .TP
-.B Mod1\-i
-Increase number of windows in master area.
+.B Mod + c, then [key] \- Configuration
+.PD 0
+.TP 2
+.B a
+Launch
+.B lxappearance
+(GTK Theme Switcher).
+.TP 2
+.B b
+Launch
+.B blueman-manager
+(Bluetooth).
+.TP 2
+.B d
+Launch
+.B pavucontrol
+(Audio Volume).
+.TP 2
+.B f
+Launch
+.B font-manager.
+.TP 2
+.B n
+Launch
+.B nm-connection-editor
+(Network).
+.TP 2
+.B p
+Launch
+.B system-config-printer.
+.TP 2
+.B s
+Launch
+.B nvidia-settings.
+.TP 2
+.B t
+Launch
+.B Flatseal
+(Flatpak Permissions).
+.PD
 .TP
-.B Mod1\-d
-Decrease number of windows in master area.
+.B Mod + d, then [key] \- Development
+.PD 0
+.TP 2
+.B c
+Launch
+.B VSCodium.
+.TP 2
+.B n
+Launch
+.B neovim
+in a new terminal.
+.TP 2
+.B g
+Launch
+.B gdb
+in a new terminal.
+.TP 2
+.B v
+Launch
+.B virt-manager.
+.PD
 .TP
-.B Mod1\-l
-Increase master area size.
+.B Mod + g, then [key] \- Gaming
+.PD 0
+.TP 2
+.B s
+Launch
+.BR Steam .
+.TP 2
+.B h
+Launch
+.B Heroic Games Launcher.
+.TP 2
+.B p
+Launch
+.B Prism Launcher
+(Minecraft).
+.TP 2
+.B r
+Launch
+.BR RetroArch .
+.TP 2
+.B o
+Launch
+.BR osu! .
+.PD
 .TP
-.B Mod1\-h
-Decrease master area size.
+.B Mod + m, then [key] \- Media & Graphics
+.PD 0
+.TP 2
+.B g
+Launch
+.BR GIMP .
+.TP 2
+.B i
+Launch
+.B nsxiv
+(Image Viewer).
+.TP 2
+.B k
+Launch
+.BR Kdenlive .
+.TP 2
+.B m
+Launch
+.BR mpv .
+.TP 2
+.B n
+Launch
+.B ncmpcpp
+(Music Player Client).
+.TP 2
+.B o
+Launch
+.B OBS Studio.
+.TP 2
+.B s
+Launch
+.BR Spotify .
+.TP 2
+.B v
+Launch
+.B Vesktop
+(Discord Client).
+.PD
 .TP
-.B Mod1\-Return
-Zooms/cycles focused window to/from master area (tiled layouts only).
+.B Mod + n, then [key] \- Network
+.PD 0
+.TP 2
+.B b
+Launch
+.B Firefox
+(Browser).
+.TP 2
+.B c
+Launch
+.B Ungoogled Chromium.
+.TP 2
+.B n
+Launch
+.B newsboat
+(RSS Reader).
+.TP 2
+.B p
+Launch
+.B profanity
+(XMPP Client).
+.PD
 .TP
-.B Mod1\-Shift\-c
-Close focused window.
+.B Mod + s, then [key] \- System
+.PD 0
+.TP 2
+.B c
+Open
+.B clipit
+(Clipboard Manager).
+.TP 2
+.B h
+Launch
+.B htop
+(Process Viewer).
+.TP 2
+.B n
+Launch
+.B nvtop
+(NVIDIA GPU Monitor).
+.TP 2
+.B g
+Launch
+.B GParted
+(Partition Editor).
+.TP 2
+.B s
+Launch
+.B Synaptic
+(Package Manager).
+.TP 2
+.B r
+Toggle
+.B redshift
+(Night Light).
+.TP 2
+.B x
+Show power menu (Shutdown/Reboot/Lock).
+.PD
+.SS Window Management
 .TP
-.B Mod1\-Shift\-space
-Toggle focused window between tiled and floating state.
+.B Mod + j/k
+Focus next/previous window in stack.
 .TP
-.B Mod1\-Tab
-Toggles to the previously selected tags.
+.B Mod + h/l
+Decrease/increase master area size.
 .TP
-.B Mod1\-Shift\-[1..n]
-Apply nth tag to focused window.
+.B Mod + Return
+Move focused window to master position (zoom).
 .TP
-.B Mod1\-Shift\-0
-Apply all tags to focused window.
+.B Mod + Shift + c
+Close the focused window. So long, and thanks for all the RAM.
 .TP
-.B Mod1\-Control\-Shift\-[1..n]
-Add/remove nth tag to/from focused window.
+.B Mod + Shift + Space
+Toggle floating mode for a window.
 .TP
-.B Mod1\-[1..n]
-View all windows with nth tag.
+.B Mod + f
+Toggle fullscreen for a window.
 .TP
-.B Mod1\-0
-View all windows with any tag.
+.B Mod + b
+Toggle the status bar. For when you need
+.I every
+last pixel.
 .TP
-.B Mod1\-Control\-[1..n]
-Add/remove all windows with nth tag to/from the view.
+.B Mod + Shift + Comma/Period
+Cycle through available layouts.
+.SS Tag and Monitor Management
 .TP
-.B Mod1\-Shift\-q
-Quit dwm.
+.B Mod + [1-9]
+View tag [1-9].
 .TP
-.B Mod1\-Control\-Shift\-q
-Restart dwm.
-.SS Mouse commands
+.B Mod + Shift + [1-9]
+Move focused window to tag [1-9].
 .TP
-.B Mod1\-Button1
-Move focused window while dragging. Tiled windows will be toggled to the floating state.
+.B Mod + Comma/Period
+Focus previous/next monitor.
 .TP
-.B Mod1\-Button2
-Toggles focused window between floating and tiled state.
-.TP
-.B Mod1\-Button3
-Resize focused window while dragging. Tiled windows will be toggled to the floating state.
-.SH CUSTOMIZATION
-dwm is customized by creating a custom config.h and (re)compiling the source
-code. This keeps it fast, secure and simple.
-.SH SIGNALS
-.TP
-.B SIGHUP - 1
-Restart the dwm process.
-.TP
-.B SIGTERM - 15
-Cleanly terminate the dwm process.
+.B Mod + Ctrl + Shift + Comma/Period
+Send focused window to previous/next monitor.
+.SH CONFIGURATION
+.B livs-dwm
+is configured by creating a custom
+.B config.h
+and (re)compiling the source code. This is seen as a feature, not a bug.
+.PP
+The
+.B autostart
+patch will execute shell commands from
+.I ~/.dwm/autostart.sh
+when dwm starts. This is the civilized way to launch your compositor, status bar scripts, and wallpaper daemon.
 .SH SEE ALSO
 .BR dmenu (1),
-.BR st (1)
-.SH ISSUES
-Java applications which use the XToolkit/XAWT backend may draw grey windows
-only. The XToolkit/XAWT backend breaks ICCCM-compliance in recent JDK 1.5 and early
-JDK 1.6 versions, because it assumes a reparenting window manager. Possible workarounds
-are using JDK 1.4 (which doesn't contain the XToolkit/XAWT backend) or setting the
-environment variable
-.BR AWT_TOOLKIT=MToolkit
-(to use the older Motif backend instead) or running
-.B xprop -root -f _NET_WM_NAME 32a -set _NET_WM_NAME LG3D
-or
-.B wmname LG3D
-(to pretend that a non-reparenting window manager is running that the
-XToolkit/XAWT backend can recognize) or when using OpenJDK setting the environment variable
-.BR _JAVA_AWT_WM_NONREPARENTING=1 .
+.BR st (1),
+.BR xscreensaver-command (1)
 .SH BUGS
-Send all bug reports with a patch to hackers@suckless.org.
+Probably many. It's your build now. Report them to yourself and have fun fixing them.
+.SH AUTHOR
+.B livs-dwm
+was configured by Liv, with a little help from the suckless.org community and a semi-sentient language model that thinks in `roff` code.
