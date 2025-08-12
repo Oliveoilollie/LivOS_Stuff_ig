@@ -158,6 +158,7 @@ static const char *nmconnectcmd[] = { "nm-connection-editor", NULL };
 static const char *printercmd[] = { "system-config-printer", NULL };
 static const char *nvidiacmd[] = { "nvidia-settings", NULL };
 static const char *flatsealcmd[] = { "flatpak", "run", "com.github.tchx84.Flatseal", NULL };
+static const char *xkillcmd[] = { "xkill", NULL };
 
 /* Development */
 static const char *codecmd[] = { "flatpak", "run", "com.vscodium.codium", NULL };
@@ -261,6 +262,7 @@ static Keychord *keychords[] = {
     &((Keychord){2, {{MODKEY, XK_s}, {0, XK_s}},                            spawn,          {.v = synapticcmd } }),
     //&((Keychord){2, {{MODKEY, XK_s}, {0, XK_x}},                            spawn,          SHCMD("choice=$(echo -e 'Shutdown\\nReboot\\nLock' | dmenu -i -p 'Power:'); [ \"$choice\" ] && case \"$choice\" in Shutdown) systemctl poweroff ;; Reboot) systemctl reboot ;; Lock) xscreensaver-command -lock ;; esac") }),
     &((Keychord){2, {{MODKEY, XK_s}, {0, XK_x}},                            spawn,          SHCMD("/home/liv/.local/scripts/dmenu-logout") }),  
+    &((Keychord){1, {{MODKEY|ControlMask, XK_x}},                           spawn,          {.v = xkillcmd } }),  
 
 	/* Screenshots */
     &((Keychord){1, {{0, XK_Print}},                                        spawn,          SHCMD("scrot '%Y-%m-%d-%T-screenshot.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/'") }),
