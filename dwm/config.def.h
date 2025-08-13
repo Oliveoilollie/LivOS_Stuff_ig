@@ -179,13 +179,13 @@ static const char *ncmpcppcmd[] = { "st", "-e", "ncmpcpp", NULL };
 static const char *obscmd[] = { "flatpak", "run", "com.obsproject.Studio", NULL };
 static const char *cidercmd[] = { "flatpak", "run", "sh.cider.genten", NULL };
 static const char *spotifycmd[] = { "spotify-adblock", NULL };
-static const char *vesktopcmd[] = { "flatpak", "run", "dev.vencord.Vesktop", NULL };
 
 /* Network & Internet */
 static const char *webcmd[] = { "firefox-esr", NULL };
 static const char *chromiumcmd[] = { "flatpak", "run", "io.github.ungoogled_software.ungoogled_chromium", NULL };
 static const char *newsboatcmd[] = { "st", "-e", "newsboat", NULL };
 static const char *profanitycmd[] = { "st", "-e", "profanity", NULL };
+static const char *vesktopcmd[] = { "flatpak", "run", "dev.vencord.Vesktop", NULL };
 
 /* System Utilities */
 static const char *fmcmd[] = { "pcmanfm", NULL };
@@ -247,13 +247,13 @@ static Keychord *keychords[] = {
     &((Keychord){2, {{MODKEY, XK_m}, {0, XK_o}},                            spawn,          {.v = obscmd} }),
     &((Keychord){2, {{MODKEY, XK_m}, {0, XK_s}},                            spawn,          {.v = spotifycmd} }),
     &((Keychord){2, {{MODKEY, XK_m}, {0, XK_c}},                            spawn,          {.v = cidercmd} }),
-    &((Keychord){2, {{MODKEY, XK_m}, {0, XK_v}},                            spawn,          {.v = vesktopcmd} }),
 
     /* MODKEY + n -> Network */
     &((Keychord){2, {{MODKEY|ControlMask, XK_n}, {0, XK_b}},                            spawn,          {.v = webcmd} }), 
     &((Keychord){2, {{MODKEY|ControlMask, XK_n}, {0, XK_c}},                            spawn,          {.v = chromiumcmd} }), 
     &((Keychord){2, {{MODKEY|ControlMask, XK_n}, {0, XK_n}},                            spawn,          {.v = newsboatcmd} }), 
     &((Keychord){2, {{MODKEY|ControlMask, XK_n}, {0, XK_p}},                            spawn,          {.v = profanitycmd} }), 
+    &((Keychord){2, {{MODKEY|ControlMask, XK_n}, {0, XK_v}},                            spawn,          {.v = vesktopcmd} }),
 
     /* MODKEY + s -> System Utilities */
     &((Keychord){2, {{MODKEY, XK_s}, {0, XK_h}},                            spawn,          {.v = htopcmd } }),
@@ -280,8 +280,8 @@ static Keychord *keychords[] = {
 	&((Keychord){1, {{MODKEY|ShiftMask, XK_i}},                             incnmaster,     {.i = -1 } }),
 	&((Keychord){1, {{MODKEY, XK_h}},                                       setmfact,       {.f = -0.05} }),
 	&((Keychord){1, {{MODKEY, XK_l}},                                       setmfact,       {.f = +0.05} }),
-	&((Keychord){1, {{MODKEY|ShiftMask, XK_h}},                             setcfact,       {.f = +0.25} }), //FIX ME
-	&((Keychord){1, {{MODKEY|ShiftMask, XK_l}},                             setcfact,       {.f = -0.25} }), //FIXME
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_h}},                             setcfact,       {.f = +0.25} }), 
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_l}},                             setcfact,       {.f = -0.25} }), 
 	&((Keychord){1, {{MODKEY|ShiftMask, XK_o}},                             setcfact,       {.f =  0.00} }),
 	&((Keychord){1, {{MODKEY, XK_Return}},                                  zoom,           {0} }),
 	&((Keychord){1, {{MODKEY, XK_Tab}},                                     view,           {0} }),
@@ -297,7 +297,7 @@ static Keychord *keychords[] = {
 
 	/* Monitor & tag management */
 	&((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
-	&((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }), //FIXME
+	&((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }), 
 	&((Keychord){1, {{MODKEY, XK_comma}},                                   focusmon,       {.i = -1 } }),
 	&((Keychord){1, {{MODKEY, XK_period}},                                  focusmon,       {.i = +1 } }),
 	&((Keychord){1, {{MODKEY|ShiftMask, XK_comma}},                         tagmon,         {.i = -1 } }), 
